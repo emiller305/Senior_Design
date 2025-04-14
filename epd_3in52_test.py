@@ -89,7 +89,6 @@ try:
     epd.refresh()
     time.sleep(2)
 
-
     # print("Quick refresh is supported, but the refresh effect is not good, but it is not recommended")
     # Himage = Image.open(os.path.join(picdir, '3in52-2.bmp'))
     # epd.display(epd.getbuffer(Himage))
@@ -102,7 +101,6 @@ try:
     # epd.lut_DU()
     # epd.refresh()
     # time.sleep(2)
-
 
     logging.info("Clear...")
     epd.Clear()
