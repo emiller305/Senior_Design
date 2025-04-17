@@ -25,7 +25,7 @@ import traceback
 logging.basicConfig(level=logging.DEBUG)
 
 try:
-    logging.info("epd3in52 Demo")
+    # logging.info("epd3in52 Demo")
     
     epd = epd3in52.EPD()
     logging.info("init and Clear")
@@ -62,9 +62,9 @@ try:
             print("Time in New York:", now.strftime("%Y-%m-%d %H:%M:%S"))
             current_time = now.strftime("%A, %B %d, %Y\n%I:%M %p")
             draw.text((10, 100), current_time, font=font18, fill=0)
-            # needs water icon
-            bmp = Image.open(os.path.join(picdir, 'water.bmp'))
-            welcome_image.paste(bmp, (100,150))
+            # # needs water icon
+            # bmp = Image.open(os.path.join(picdir, 'water.bmp'))
+            # welcome_image.paste(bmp, (100,150))
             # display the image
             epd.display(epd.getbuffer(welcome_image))
             # epd.lut_GC()
@@ -72,8 +72,9 @@ try:
             epd.refresh()
             time.sleep(20)
     except:
-        logging.info("Interrupted by user. Going to sleep...")
-        epd.sleep()
+        logging.info("ctrl + c:")
+        epd3in52.epdconfig.module_exit(cleanup=True)
+        exit()
     
     logging.info("Goto Sleep...")
     epd.sleep()
