@@ -62,11 +62,10 @@ try:
             print("Time in New York:", now.strftime("%Y-%m-%d %H:%M:%S"))
             current_time = now.strftime("%A, %B %d, %Y\n%I:%M %p")
             draw.text((10, 100), current_time, font=font18, fill=0)
-            # # needs water icon
-            # bmp = Image.open(os.path.join(picdir, 'water.bmp'))
-            # welcome_image.paste(bmp, (100,150))
             # display the image
-            epd.display(epd.getbuffer(welcome_image))
+            #epd.display(epd.getbuffer(welcome_image))
+            flipped_image = welcome_image.rotate(180)
+            epd.display(epd.getbuffer(flipped_image))
             # epd.lut_GC()
             epd.lut_DU() # quick refresh
             epd.refresh()
