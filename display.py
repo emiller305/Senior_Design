@@ -48,10 +48,16 @@ try:
     # add code to display welcome screen and current time
     logging.info("Displaying welcome screen and current time...")
     try:
-        while True:
+        # while loop
+        while True: 
             # create a new image for the welcome screen - horizontal
             welcome_image = Image.new('1', (epd.height, epd.width), 255)  # 255: white background
             draw = ImageDraw.Draw(welcome_image)
+            # insert logo
+            logging.info("read logo bmp file")
+            logo_bmp = Image.open(os.path.join(picdir, 'logo-bw.bmp'))
+            resized_bmp = logo_bmp.resize((100, 100))
+            welcome_image.paste(resized_bmp, (225,0))
             # draw welcome message
             draw.text((50, 0), "Welcome to", font=font24, fill=0)
             draw.text((50, 30), "LeafNotes", font=font30, fill=0)
@@ -63,14 +69,16 @@ try:
             current_time = now.strftime("%A, %B %d, %Y\n%I:%M %p")
             draw.text((10, 100), current_time, font=font18, fill=0)
             # display the image
-            #epd.display(epd.getbuffer(welcome_image))
+            # epd.display(epd.getbuffer(welcome_image))
             flipped_image = welcome_image.rotate(180)
             epd.display(epd.getbuffer(flipped_image))
             # epd.lut_GC()
             epd.lut_DU() # quick refresh
             epd.refresh()
-            time.sleep(20)
+            time.sleep(30)
     except:
+        logging.info("Clear...")
+        epd.Clear()
         logging.info("ctrl + c:")
         epd3in52.epdconfig.module_exit(cleanup=True)
         exit()
